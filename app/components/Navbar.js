@@ -1,17 +1,13 @@
-import React, {Component} from 'react';
+import React from 'react';
 import {Link} from 'react-router-dom';
 
-export default class NavBar extends Component {
-  constructor() {
-    super();
-    this.state = {};
-  }
-  render() {
-    return (
-      <nav>
-        <Link to='/'>Home</Link>
-        <Link to='/students'>Students</Link>
-      </nav>
-    )
-  }
+export default function NavBar() {
+  return (
+    <nav>
+      <h1>Check out this home navigation bar, yo!</h1>
+      <Link to="/">Home</Link>
+      <Link to="/students">Students</Link>
+      <Link to="/campuses">Campuses</Link>
+    </nav>
+  )
 }

@@ -1,6 +1,6 @@
 const express = require('express');
 const CampusRouter = express.Router();
-const Campus = require('../db/models/Campus');
+const {Campus, Student} = require('../db/models');
 
 CampusRouter.param('id', (req, res, next, id) => {
   Campus.findById(id)
@@ -25,7 +25,7 @@ CampusRouter.get('/', (req, res, next) => {
 });
 
 CampusRouter.get('/:id', (req, res) => {
-  res.json(req.campus);
+  res.json(req.campus)
 });
 
 CampusRouter.post('/', (req, res, next) => {
