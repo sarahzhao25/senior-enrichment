@@ -1,14 +1,25 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import {firstNameChange, lastNameChange, emailChange, selectValueChange} from '../store';
+import {firstNameChange, lastNameChange, emailChange, selectValueChange, gpaChange} from '../store';
 
 
 //DO I WANT IT TO HAVE A LOCAL STATE? I HAVE QUITE A FEW THINGS GOING ON HERE. ALSO SUBMIT HANDLER IS A BITCH
-function StudentAddForm(props) {
+function StudentForm(props) {
     return (
       <div>
         <h3>Mmm what's your name?</h3>
-        <form id="new-student-form">
+        <form
+          id="new-student-form"
+          onSubmit={(event) => {
+            event.preventDefault();
+            props.submitHandler({
+            firstName: props.firstNameChange || props.campus && props.campus.firstName,
+            lastName: props.lastNameChange || props.campus && props.campus.lastName,
+            email: props.emailChange || props.campus && props.campus.email,
+            gpa: props.gpaChange || props.campus && props.campus.gpa,
+            campusId: props.selectValueChange || props.campus && props.campus.campusId
+          }
+          )}}>
         <div>
           <label>First Name: </label>
           <input
@@ -28,8 +39,18 @@ function StudentAddForm(props) {
           <input
             value={props.emailChange}
             onChange={props.emailChangeHandler}
-            type="text"
+            type="email"
             placeholder="... @gmail.com" />
+
+          <label>GPA: </label>
+          <input
+            value={props.gpaChange}
+            onChange={props.gpaChangeHandler}
+            type="number"
+            step="0.01"
+            min="0"
+            max="4"
+            placeholder="Dat grade point average?" />
 
           <label>Campus: </label>
           <select value={props.selectValueChange} onChange={props.selectValueChangeHandler}>
@@ -53,17 +74,20 @@ function mapStateToProps(state) {
     firstNameChange: state.firstNameChange,
     lastNameChange: state.lastNameChange,
     emailChange: state.emailChange,
-    selectValueChange: state.selectValueChange
+    selectValueChange: state.selectValueChange,
+    gpaChange: state.gpaChange
   }
 }
 
-function mapDispatchToProps(dispatch) {
+function mapDispatchToProps(dispatch, ownProps) {
   return {
     firstNameChangeHandler: (event) => dispatch(firstNameChange(event.target.value)),
     lastNameChangeHandler: (event) => dispatch(lastNameChange(event.target.value)),
     emailChangeHandler: (event) => dispatch(emailChange(event.target.value)),
-    selectValueChangeHandler: (event) => dispatch(selectValueChange(event.target.value))
+    selectValueChangeHandler: (event) => dispatch(selectValueChange(event.target.value)),
+    gpaChangeHandler: (event) => dispatch(gpaChange(event.target.value)),
+    submitHandler: (info) => dispatch(ownProps.postOrUpdateA(info, ownProps.instance))
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(StudentAddForm);
+export default connect(mapStateToProps, mapDispatchToProps)(StudentForm);

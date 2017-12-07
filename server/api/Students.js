@@ -24,12 +24,12 @@ StudentRouter.get('/', (req, res, next) => {
 });
 
 StudentRouter.get('/:id', (req, res) => {
-  res.json(req.student);
+  res.json(req.student)
 });
 
 StudentRouter.post('/', (req, res, next) => {
  // Campus.findOrCreate({name: req.body.campusName})
-  Student.create(req.body)
+  Student.create(req.body, {include: Campus})
   .then(newStudent => res.json(newStudent))
   .catch(next);
 });

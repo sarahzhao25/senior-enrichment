@@ -1,14 +1,15 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import {Link} from 'react-router-dom';
+import {Route, Link} from 'react-router-dom';
+import {deleteStudentFromServerA, updateStudentToServerA} from '../store';
+import StudentForm from './StudentForm';
 
 function StudentSingle(props) {
   //console.log(props.students, props.match)
-  if (props.students.length) {
   let student = props.students.find(student => student.id == props.match.params.studentId);
-  return (
+  return student ? (
     <div>
-      <h1>This student, {student.name}, is going to Isengard!</h1>
+      <h1>This SINGLE student, {student.name}, is going to Isengard!</h1>
       <table>
         <tbody>
           <tr>
@@ -23,16 +24,16 @@ function StudentSingle(props) {
               <td>{student.campus.name}</td>
               <td>{student.email}</td>
               <td>{student.gpa}</td>
-              <td><button>X-KILL!</button></td>
-              <td><button>Update?</button></td>
-              <td><Link to={`/campuses/${student.campusId}`}><button>This Campus?</button></Link></td>
+              <td><Link to={`/students/${student.id}/form`}><button>UPDATE STUDENT</button></Link></td>
+              <td><Link to={`/campuses/${student.campusId}`}><button>TO SINGLE CAMPUS</button></Link></td>
             </tr>
         </tbody>
       </table>
+      <Route path="/students/:studentId/form" render={() => <StudentForm postOrUpdateA={updateStudentToServerA} instance={student} />} />
     </div>
   )
-  }
-  return null;
+  :
+  null;
 }
 
 function mapStateToProps(state, ownProps) {
@@ -42,5 +43,11 @@ function mapStateToProps(state, ownProps) {
   }
 }
 
-export default connect(mapStateToProps)(StudentSingle)
+function mapDispatchToProps(dispatch, ownProps) {
+  return {
+    deleteHandler: (student) => dispatch(deleteStudentFromServerA(student, ownProps))
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(StudentSingle)
 

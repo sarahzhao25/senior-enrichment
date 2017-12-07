@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
-import {postCampusToServerA} from '../store';
 import {connect} from 'react-redux';
+import {postCampusToServerA} from '../store';
 
 class CampusAddForm extends Component {
   constructor() {
@@ -38,7 +38,7 @@ class CampusAddForm extends Component {
   submitHandler(event) {
     event.preventDefault();
     this.props.postCampus({ name: this.state.campusName, imageUrl: this.state.campusUrl, description: this.state.campusDescription });
-    this.setState({campusName: ''});
+    this.setState({campusName: '', campusPicture: '', campusDescription: '', isDirty: false});
   }
 
   render() {

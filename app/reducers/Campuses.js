@@ -3,7 +3,6 @@ import axios from 'axios';
 //CONSTANTS FOR ACTION TYPES
 const GOT_CAMPUSES_FROM_SERVER = 'GOT_CAMPUSES_FROM_SERVER';
 const GOT_CAMPUS_FROM_SERVER = 'GOT_CAMPUS_FROM_SERVER';
-const DELETED_CAMPUS_FROM_SERVER = 'DELETED_CAMPUS_FROM_SERVER';
 
 //ASYNC OPS END IN A
 export function getCampusesFromServerA() {
@@ -33,7 +32,16 @@ export function deleteCampusFromServerA(campus, history) {
       dispatch(getCampusesFromServerA());
     }
     )
-    .catch(console.error)
+    .catch(console.error);
+  }
+}
+
+export function updateCampusToServerA(updates, campusId) {
+  return function(dispatch) {
+    axios.put(`/api/campuses/${campusId}`, updates)
+    .then(response => response.data)
+    .then(() => dispatch(getCampusesFromServerA()))
+    .catch(console.error);
   }
 }
 

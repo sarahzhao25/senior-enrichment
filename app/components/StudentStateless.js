@@ -1,7 +1,9 @@
 import React from 'react';
-import {Link} from 'react-router-dom';
+import {connect} from 'react-redux';
+import {Link, withRouter} from 'react-router-dom';
+import {deleteStudentFromServerA} from '../store';
 
-export default function StudentStateless (props) {
+function StudentStateless (props) {
   let students = props.students;
   return (
     <table>
@@ -9,19 +11,32 @@ export default function StudentStateless (props) {
         <tr>
           <th>Students</th>
           <th>Campus</th>
-          <th>Campus Description</th>
         </tr>
 
         {students.map(student => (
           <tr key={student.id}>
-            <td>{student.name}</td>
+            <td><Link to={`/students/${student.id}`}>{student.name}</Link></td>
             <td>{student.campus.name}</td>
-            <td>{student.campus.description}</td>
-            <td><button>X-KILL!</button></td>
-            <td><Link to={`/students/${student.id}`}><button>Check me out!</button></Link></td>
+            <td><button onClick={() => props.deleteHandler(student)}>DELETE STUDENT ENTIRELY</button></td>
+            <td><Link to={`/students/${student.id}/form`}><button>SWAP STUDENT'S CAMPUS</button></Link></td>
           </tr>
           ))}
       </tbody>
     </table>
   )
 }
+
+function mapStateToProps (state, ownProps) {
+  return {
+    students: ownProps.students,
+    selectValueChange: state.selectValueChange
+  }
+}
+
+function mapDispatchToProps(dispatch, ownProps) {
+  return {
+    deleteHandler: (student) => dispatch(deleteStudentFromServerA(student, ownProps))
+  }
+}
+
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(StudentStateless));

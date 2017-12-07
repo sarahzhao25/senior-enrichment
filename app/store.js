@@ -11,3 +11,4 @@ export * from './reducers/firstNameChange';
 export * from './reducers/lastNameChange';
 export * from './reducers/emailChange';
 export * from './reducers/selectValueChange';
+export * from './reducers/gpaChange';

@@ -6,6 +6,7 @@ import firstNameChange from './firstNameChange';
 import lastNameChange from './lastNameChange';
 import emailChange from './emailChange';
 import selectValueChange from './selectValueChange';
+import gpaChange from './gpaChange';
 
 const rootReducer = combineReducers({
   students,
@@ -13,7 +14,8 @@ const rootReducer = combineReducers({
   firstNameChange,
   lastNameChange,
   emailChange,
-  selectValueChange
+  selectValueChange,
+  gpaChange
 });
 
 export default rootReducer

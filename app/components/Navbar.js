@@ -5,9 +5,9 @@ export default function NavBar() {
   return (
     <nav>
       <h1>Check out this home navigation bar, yo!</h1>
-      <Link to="/">Home</Link>
-      <Link to="/students">Students</Link>
-      <Link to="/campuses">Campuses</Link>
+      <Link to="/"><h3>HOME</h3></Link>
+      <Link to="/students"><h3>ALL STUDENTS</h3></Link>
+      <Link to="/campuses"><h3>ALL CAMPUSES</h3></Link>
     </nav>
   )
 }

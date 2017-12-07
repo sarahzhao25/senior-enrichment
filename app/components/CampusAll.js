@@ -8,10 +8,9 @@ function CampusAll(props) {
   let campuses = props.campuses;
   let students = props.students;
   let deleteCampus = props.deleteCampus;
-  console.log(deleteCampus)
   return (
     <div>
-      <h1>These are the campuses!!!!</h1>
+      <h1>ALL CAMPUSES</h1>
       <CampusAddForm />
       <ul>
       {campuses.map(campus => {
@@ -19,7 +18,7 @@ function CampusAll(props) {
         return (<li key={campus.id}>
                   <Link to={`/campuses/${campus.id}`}>{campus.name}
                   </Link>
-                  <button disabled = {studentLength > 0} onClick={() => deleteCampus(campus)}>Delete Campus :(</button>
+                  <button disabled = {studentLength > 0} onClick={() => deleteCampus(campus)}>DELETE Campus :(</button>
                 </li>)
       }
       )}

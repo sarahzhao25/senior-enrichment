@@ -1,23 +1,32 @@
 import React from 'react';
 import {connect} from 'react-redux';
+import {Route, Link} from 'react-router-dom';
 import StudentStateless from './StudentStateless';
 import {deleteCampusFromServerA} from '../store';
+import CampusUpdateForm from './CampusUpdateForm';
 
 function CampusSingle(props) {
   let campusId = props.campusId;
   let students = props.students.filter(student => student.campusId == campusId);
   let deleteCampus = props.deleteCampus;
   let campus = props.campuses.find(oneCampus => oneCampus.id == campusId);
-  return (
+  return campus ?
+   (
     <div>
-      <h1>I'll tell you all about this campus!</h1>
-      <h2>Name: {campus.name}</h2>
-      <h3>Description: {campus.description}</h3>
+      <h1>I'll tell you all about this SINGLE campus!</h1>
+      <h2>Name:</h2>
+      <h3>{campus.name}</h3>
+      <h2>Description: </h2>
+      <h3>{campus.description}</h3>
       <img src={campus.imageUrl} alt="Campus Photo" />
       <StudentStateless students={students} />
-      <button disabled = {students.length > 0} onClick={() => deleteCampus(campus)}>Delete Campus :(</button>
+      <button disabled = {students.length > 0} onClick={() => deleteCampus(campus)}>DELETE Campus :(</button>
+      <Link to={`/campuses/${campus.id}/update`}><button>UPDATE this Campus</button></Link>
+      <Route path="/campuses/:campusId/update" render={() => (<CampusUpdateForm campuses={props.campuses} students={students} campus={campus} />)} />
     </div>
   )
+  :
+  null;
 }
 
 function mapStateToProps(state, ownProps) {
