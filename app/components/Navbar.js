@@ -1,13 +1,21 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
+import RaisedButton from 'material-ui/RaisedButton';
+import AppBar from 'material-ui/AppBar';
 
 export default function NavBar() {
   return (
-    <nav>
-      <h1>Check out this home navigation bar, yo!</h1>
-      <Link to="/"><h3>HOME</h3></Link>
-      <Link to="/students"><h3>ALL STUDENTS</h3></Link>
-      <Link to="/campuses"><h3>ALL CAMPUSES</h3></Link>
-    </nav>
+    <div>
+      <AppBar
+        title="I LIKE FRISBEE"
+        iconClassNameRight="muidocs-icon-navigation-expand-more"
+      />
+      <nav>
+        <h1>Check out this home navigation bar, yo!</h1>
+        <span><Link to="/"><RaisedButton label="HOME" /></Link></span>
+        <span><Link to="/students"><RaisedButton label="ALL CAMPUSES" /></Link></span>
+        <span><Link to="/campuses"><RaisedButton label="ALLSTUDENTS" /></Link></span>
+      </nav>
+    </div>
   )
 }

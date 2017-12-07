@@ -2,27 +2,52 @@ import React from 'react';
 import {connect} from 'react-redux';
 import {Link, withRouter} from 'react-router-dom';
 import {deleteStudentFromServerA} from '../store';
+import {Table, TableBody, TableHeader, TableHeaderColumn, TableRow, TableRowColumn} from 'material-ui/Table';
+import FloatingActionButton from 'material-ui/FloatingActionButton'
 
 function StudentStateless (props) {
   let students = props.students;
   return (
-    <table>
-      <tbody>
-        <tr>
-          <th>Students</th>
-          <th>Campus</th>
-        </tr>
-
-        {students.map(student => (
-          <tr key={student.id}>
-            <td><Link to={`/students/${student.id}`}>{student.name}</Link></td>
-            <td>{student.campus.name}</td>
-            <td><button onClick={() => props.deleteHandler(student)}>DELETE STUDENT ENTIRELY</button></td>
-            <td><Link to={`/students/${student.id}/form`}><button>SWAP STUDENT'S CAMPUS</button></Link></td>
-          </tr>
-          ))}
-      </tbody>
-    </table>
+    <Table>
+    <TableHeader
+      displaySelectAll={false}
+      adjustForCheckbox={false}>
+      <TableRow>
+        <TableHeaderColumn colSpan="5" style={{textAlign: 'center'}}>
+          ALL STUDENTS
+        </TableHeaderColumn>
+      </TableRow>
+      <TableRow>
+        <TableHeaderColumn>ID</TableHeaderColumn>
+        <TableHeaderColumn>Students</TableHeaderColumn>
+        <TableHeaderColumn>Campus</TableHeaderColumn>
+        <TableHeaderColumn>Delete Student?</TableHeaderColumn>
+        <TableHeaderColumn>Swap His/Her Campus?</TableHeaderColumn>
+      </TableRow>
+    </TableHeader>
+    <TableBody
+      displayRowCheckbox={false}>
+    {students.map(student => (
+      <TableRow key={student.id}>
+        <TableRowColumn>{student.id}</TableRowColumn>
+        <TableRowColumn>{student.name}</TableRowColumn>
+        <TableRowColumn>{student.campus.name}</TableRowColumn>
+        <TableRowColumn>
+          <FloatingActionButton
+          onClick={() => props.deleteHandler(student)}
+          mini={true}>X</FloatingActionButton>
+        </TableRowColumn>
+        <TableRowColumn>
+          <Link to={`/students/${student.id}/form`}>
+            <FloatingActionButton mini={true}>
+              :D
+            </FloatingActionButton>
+          </Link>
+        </TableRowColumn>
+      </TableRow>
+    ))}
+    </TableBody>
+  </Table>
   )
 }
 

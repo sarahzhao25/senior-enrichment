@@ -1,13 +1,14 @@
 import React, {Component} from 'react';
 import {HashRouter as Router, Route, Switch} from 'react-router-dom';
-import Navbar from './Navbar';
+import {connect} from 'react-redux';
+import {getCampusesFromServerA, getStudentsFromServerA} from '../store';
+//import Navbar from './Navbar';
 import StudentAll from './StudentAll';
 import CampusAll from './CampusAll';
 import CampusSingle from './CampusSingle';
 import StudentSingle from './StudentSingle';
 import Home from './Home';
-import {getCampusesFromServerA, getStudentsFromServerA} from '../store';
-import {connect} from 'react-redux';
+import AppBarExampleComposition from '../mui-components/AppBarComposition';
 
 class App extends Component {
 
@@ -20,7 +21,7 @@ class App extends Component {
     return (
       <Router>
         <div>
-          <Navbar />
+          <AppBarExampleComposition /> {/*updated NavBar*/}
           <div>
             <Switch>
               <Route exact path="/" component={Home} />
@@ -36,11 +37,6 @@ class App extends Component {
   }
 }
 
-function mapStateToProps() {
-  return {
-  }
-}
-
 function mapDispatchToProps(dispatch) {
   return {
     getCampuses: () => dispatch(getCampusesFromServerA()),
@@ -48,4 +44,4 @@ function mapDispatchToProps(dispatch) {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(App);
+export default connect(null, mapDispatchToProps)(App);
