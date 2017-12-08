@@ -28,8 +28,9 @@ function CampusAll(props) {
   let students = props.students;
   let deleteCampus = props.deleteCampus;
   return (
-    <div>
+    <div> {props.location &&
       <CampusAddForm />
+    }
       <div style={styles.root}>
         <GridList cellHeight={180} style={styles.gridList}>
       <Subheader>Campuses</Subheader>
@@ -54,10 +55,11 @@ function CampusAll(props) {
   )
 }
 
-function mapStateToProps(state) {
+function mapStateToProps(state, ownProps) {
   return {
     campuses: state.campuses,
-    students: state.students
+    students: state.students,
+    location: ownProps.location
   }
 }
 
