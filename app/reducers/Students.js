@@ -40,9 +40,9 @@ export function deleteStudentFromServerA(student, props) {
   }
 }
 
-export function updateStudentToServerA(body, student) {
+export function updateStudentToServerA(body, studentId) {
     return function(dispatch) {
-    axios.put(`/api/students/${student.id}`, body)
+    axios.put(`/api/students/${studentId}`, body)
     .then(response => response.data)
     .then(() => {
       dispatch(getStudentsFromServerA());

@@ -5,6 +5,7 @@ import IconMenu from 'material-ui/IconMenu';
 import MenuItem from 'material-ui/MenuItem';
 import MoreVertIcon from 'material-ui/svg-icons/navigation/more-vert';
 import {Link} from 'react-router-dom';
+const Title = "Welcome To Margaret Hamilton Interplanetary Academy of JavaScript";
 
 const Logged = (props) => (
   <IconMenu
@@ -25,7 +26,7 @@ function AppBarExampleComposition() {
     return (
       <div>
         <AppBar
-          title="I LIKE FRISBEE"
+          title="The Hamiltons moved uptown ... and learned to deal with the unimaginable.."
           showMenuIconButton={false}
           iconElementRight={<Logged />}
         />

@@ -2,6 +2,7 @@ import React from 'react';
 import {connect} from 'react-redux';
 import {Route, Link} from 'react-router-dom';
 import StudentStateless from './StudentStateless';
+import CampusAddStudent from './CampusAddStudent';
 import {deleteCampusFromServerA} from '../store';
 import CampusUpdateForm from './CampusUpdateForm';
 
@@ -22,7 +23,9 @@ function CampusSingle(props) {
       <StudentStateless students={students} />
       <button disabled = {students.length > 0} onClick={() => deleteCampus(campus)}>DELETE Campus :(</button>
       <Link to={`/campuses/${campus.id}/update`}><button>UPDATE this Campus</button></Link>
+      <Link to={`/campuses/${campus.id}/addStudent`}><button>ADD student here!</button></Link>
       <Route path="/campuses/:campusId/update" render={() => (<CampusUpdateForm campuses={props.campuses} students={students} campus={campus} />)} />
+      <Route path="/campuses/:campusId/addStudent" render={() => (<CampusAddStudent campusId={campus.id} />)} />
     </div>
   )
   :

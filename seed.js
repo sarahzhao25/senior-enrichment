@@ -28,7 +28,7 @@ const campuses = [{
   description: 'If a marker commits a marking violation after being called for a marking violation during the same stall count (XIV.A.1) but before the thrower is in the act of throwing, the thrower may choose to either call another marking violation or to treat the marking violation as a general defensive violation (XVI). To treat it as a general violation, the thrower must call violation.'
 }, {
   name: 'Ariel University',
-  imageUrl: '/CampusImages/image7.jpg',
+  imageUrl: '/CampusImages/image12.jpg',
   description: 'Each player is entitled to occupy any position on the field not occupied by an opposing player, unless specifically overridden elsewhere, provided that no personal contact is caused in taking such a position.'
 }, {
   name: 'Callisto University',
@@ -213,6 +213,168 @@ const students = [{
   firstName: 'Mike',
   lastName: 'Zalisk',
   email: 'mZalisk@brutesquad.com',
+  gpa: gpa(),
+  campusId: campusId()
+}, {
+  firstName: 'Harry',
+  lastName: 'Potter',
+  email: 'hPotter@hogwarts.edu',
+  gpa: gpa(),
+  campusId: campusId()
+}, {
+  firstName: 'Hermione',
+  lastName: 'Granger',
+  email: 'hGranger@hogwarts.edu',
+  gpa: gpa(),
+  campusId: campusId()
+}, {
+  firstName: 'Ron',
+  lastName: 'Weasley',
+  email: 'rWeasley@hogwarts.edu',
+  gpa: gpa(),
+  campusId: campusId()
+}, {
+  firstName: 'Albus',
+  lastName: 'Dumbledore',
+  email: 'ADumbledore@hogwarts.edu',
+  gpa: gpa(),
+  campusId: campusId()
+}, {
+  firstName: 'Minerva',
+  lastName: 'McGonagall',
+  email: 'mMcGonagall@hogwarts.edu',
+  gpa: gpa(),
+  campusId: campusId()
+}, {
+  firstName: 'Draco',
+  lastName: 'Malfoy',
+  email: 'dMalfoy@hogwarts.edu',
+  gpa: gpa(),
+  campusId: campusId()
+}, {
+  firstName: 'Dean',
+  lastName: 'Thomas',
+  email: 'dThomas@hogwarts.edu',
+  gpa: gpa(),
+  campusId: campusId()
+}, {
+  firstName: 'Fred',
+  lastName: 'Weasley',
+  email: 'fWeasley@hogwarts.edu',
+  gpa: gpa(),
+  campusId: campusId()
+}, {
+  firstName: 'George',
+  lastName: 'Weasley',
+  email: 'gWeasley@hogwarts.edu',
+  gpa: gpa(),
+  campusId: campusId()
+}, {
+  firstName: 'Ginny',
+  lastName: 'Weasley',
+  email: 'gWeasley@hogwarts.edu',
+  gpa: gpa(),
+  campusId: campusId()
+}, {
+  firstName: 'Percy',
+  lastName: 'Weasley',
+  email: 'PWeasley@hogwarts.edu',
+  gpa: gpa(),
+  campusId: campusId()
+}, {
+  firstName: 'Arthur',
+  lastName: 'Weasley',
+  email: 'AWeasley@hogwarts.edu',
+  gpa: gpa(),
+  campusId: campusId()
+}, {
+  firstName: 'Molly',
+  lastName: 'Weasley',
+  email: 'mWeasley@hogwarts.edu',
+  gpa: gpa(),
+  campusId: campusId()
+}, {
+  firstName: 'Tom Marvolo',
+  lastName: 'Riddle',
+  email: 'VOLDEMORT@hogwarts.edu',
+  gpa: gpa(),
+  campusId: campusId()
+}, {
+  firstName: 'Argus',
+  lastName: 'Filch',
+  email: 'MrsNorris@hogwarts.edu',
+  gpa: gpa(),
+  campusId: campusId()
+}, {
+  firstName: 'Sirius',
+  lastName: 'Black',
+  email: 'SBlack@hogwarts.edu',
+  gpa: gpa(),
+  campusId: campusId()
+}, {
+  firstName: 'James',
+  lastName: 'Potter',
+  email: 'jPotter@hogwarts.edu',
+  gpa: gpa(),
+  campusId: campusId()
+}, {
+  firstName: 'Lily',
+  lastName: 'Evans',
+  email: 'LEvans@hogwarts.edu',
+  gpa: gpa(),
+  campusId: campusId()
+}, {
+  firstName: 'Remus',
+  lastName: 'Lupin',
+  email: 'rLupin@hogwarts.edu',
+  gpa: gpa(),
+  campusId: campusId()
+}, {
+  firstName: 'Severus',
+  lastName: 'Snape',
+  email: 'sSnape@hogwarts.edu',
+  gpa: gpa(),
+  campusId: campusId()
+}, {
+  firstName: 'Bill',
+  lastName: 'Weasley',
+  email: 'bWeasley@hogwarts.edu',
+  gpa: gpa(),
+  campusId: campusId()
+}, {
+  firstName: 'Charlie',
+  lastName: 'Weasley',
+  email: 'dragons@hogwarts.edu',
+  gpa: gpa(),
+  campusId: campusId()
+}, {
+  firstName: 'Helga',
+  lastName: 'Hufflepuff',
+  email: 'Helga@hogwarts.edu',
+  gpa: gpa(),
+  campusId: campusId()
+}, {
+  firstName: 'Rowena',
+  lastName: 'Ravenclaw',
+  email: 'Rowena@hogwarts.edu',
+  gpa: gpa(),
+  campusId: campusId()
+}, {
+  firstName: 'Godric',
+  lastName: 'Gryffindor',
+  email: 'Godric@hogwarts.edu',
+  gpa: gpa(),
+  campusId: campusId()
+}, {
+  firstName: 'Salazar',
+  lastName: 'Slytherin',
+  email: 'Salazar@hogwarts.edu',
+  gpa: gpa(),
+  campusId: campusId()
+}, {
+  firstName: 'Neville',
+  lastName: 'Longbottom',
+  email: 'nLongbottom@hogwarts.edu',
   gpa: gpa(),
   campusId: campusId()
 }]

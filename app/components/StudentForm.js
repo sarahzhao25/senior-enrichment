@@ -13,11 +13,11 @@ function StudentForm(props) {
           onSubmit={(event) => {
             event.preventDefault();
             props.submitHandler({
-            firstName: props.firstNameChange || props.campus && props.campus.firstName,
-            lastName: props.lastNameChange || props.campus && props.campus.lastName,
-            email: props.emailChange || props.campus && props.campus.email,
-            gpa: props.gpaChange || props.campus && props.campus.gpa,
-            campusId: props.selectValueChange || props.campus && props.campus.campusId
+            firstName: props.firstNameChange || undefined,
+            lastName: props.lastNameChange || undefined,
+            email: props.emailChange || undefined,
+            gpa: props.gpaChange || undefined,
+            campusId: props.selectValueChange || undefined
           }
           )}}>
         <div>
@@ -85,7 +85,7 @@ function mapDispatchToProps(dispatch, ownProps) {
     emailChangeHandler: (event) => dispatch(emailChange(event.target.value)),
     selectValueChangeHandler: (event, index, value) => dispatch(selectValueChange(value)),
     gpaChangeHandler: (event) => dispatch(gpaChange(event.target.value)),
-    submitHandler: (info) => dispatch(ownProps.postOrUpdateA(info, ownProps.instance))
+    submitHandler: (info) => dispatch(ownProps.postOrUpdateA(info, ownProps.studentId))
   }
 }
 

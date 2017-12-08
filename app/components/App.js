@@ -31,6 +31,7 @@ class App extends Component {
               <Route path="/campuses/:campusId" component={CampusSingle} />
               <Route exact path="/students/create" render={() => (<StudentForm postOrUpdateA={postStudentToServerA} />)} />
               <Route path="/students/:studentId" component={StudentSingle} />
+              <Route default component={Home} />
             </Switch>
           </div>
         </div>
