@@ -4,7 +4,10 @@ const db = require('../index');
 const Campus = db.define('campus', {
   name: {
     type: Sequelize.STRING,
-    allowNull: false
+    allowNull: false,
+    validate: {
+      notEmpty: true
+    }
   },
   imageUrl: {
     type: Sequelize.STRING,

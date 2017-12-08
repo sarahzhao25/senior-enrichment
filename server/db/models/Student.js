@@ -4,17 +4,24 @@ const db = require('../index');
 const Student = db.define('student', {
   firstName: {
     type: Sequelize.STRING,
-    allowNull: false
+    allowNull: false,
+    validate: {
+      notEmpty: true
+    }
   },
   lastName: {
     type: Sequelize.STRING,
-    allowNull: false
+    allowNull: false,
+    validate: {
+      notEmpty: true
+    }
   },
   email: {
     type: Sequelize.STRING,
     allowNull: false,
     validate: {
-      isEmail: true
+      isEmail: true,
+      notEmpty: true
     }
   },
   gpa: {
@@ -31,5 +38,5 @@ const Student = db.define('student', {
     }
   }
 })
-//Must assign a student to a campus?
+
 module.exports = Student;
