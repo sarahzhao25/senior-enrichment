@@ -26,6 +26,7 @@ function AppBarExampleComposition() {
       <div>
         <AppBar
           title="I LIKE FRISBEE"
+          showMenuIconButton={false}
           iconElementRight={<Logged />}
         />
       </div>

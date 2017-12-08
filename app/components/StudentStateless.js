@@ -3,7 +3,7 @@ import {connect} from 'react-redux';
 import {Link, withRouter} from 'react-router-dom';
 import {deleteStudentFromServerA} from '../store';
 import {Table, TableBody, TableHeader, TableHeaderColumn, TableRow, TableRowColumn} from 'material-ui/Table';
-import FloatingActionButton from 'material-ui/FloatingActionButton'
+import FlatButton from 'material-ui/FlatButton';
 
 function StudentStateless (props) {
   let students = props.students;
@@ -13,16 +13,11 @@ function StudentStateless (props) {
       displaySelectAll={false}
       adjustForCheckbox={false}>
       <TableRow>
-        <TableHeaderColumn colSpan="5" style={{textAlign: 'center'}}>
-          ALL STUDENTS
-        </TableHeaderColumn>
-      </TableRow>
-      <TableRow>
         <TableHeaderColumn>ID</TableHeaderColumn>
         <TableHeaderColumn>Students</TableHeaderColumn>
         <TableHeaderColumn>Campus</TableHeaderColumn>
-        <TableHeaderColumn>Delete Student?</TableHeaderColumn>
-        <TableHeaderColumn>Swap His/Her Campus?</TableHeaderColumn>
+        <TableHeaderColumn>Expel Student?</TableHeaderColumn>
+        <TableHeaderColumn>Transfer Student?</TableHeaderColumn>
       </TableRow>
     </TableHeader>
     <TableBody
@@ -30,18 +25,18 @@ function StudentStateless (props) {
     {students.map(student => (
       <TableRow key={student.id}>
         <TableRowColumn>{student.id}</TableRowColumn>
-        <TableRowColumn>{student.name}</TableRowColumn>
+        <TableRowColumn><Link to={`/students/${student.id}`}>{student.name}</Link></TableRowColumn>
         <TableRowColumn>{student.campus.name}</TableRowColumn>
         <TableRowColumn>
-          <FloatingActionButton
+          <FlatButton
           onClick={() => props.deleteHandler(student)}
-          mini={true}>X</FloatingActionButton>
+          >X</FlatButton>
         </TableRowColumn>
         <TableRowColumn>
           <Link to={`/students/${student.id}/form`}>
-            <FloatingActionButton mini={true}>
+            <FlatButton>
               :D
-            </FloatingActionButton>
+            </FlatButton>
           </Link>
         </TableRowColumn>
       </TableRow>
