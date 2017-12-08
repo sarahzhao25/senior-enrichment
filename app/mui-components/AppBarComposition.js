@@ -15,9 +15,9 @@ const Logged = (props) => (
     targetOrigin={{horizontal: 'right', vertical: 'top'}}
     anchorOrigin={{horizontal: 'right', vertical: 'top'}}
   >
-    <Link to="/"><MenuItem primaryText="HOME" /></Link>
-    <Link to="/students"><MenuItem primaryText="STUDENTS" /></Link>
-    <Link to="/campuses"><MenuItem primaryText="CAMPUSES" /></Link>
+    <Link to="/" style={{ textDecoration: 'none' }}><MenuItem primaryText="HOME" /></Link>
+    <Link to="/students" style={{ textDecoration: 'none' }}><MenuItem primaryText="STUDENTS" /></Link>
+    <Link to="/campuses" style={{ textDecoration: 'none' }}><MenuItem primaryText="CAMPUSES" /></Link>
   </IconMenu>
 );
 

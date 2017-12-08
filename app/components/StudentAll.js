@@ -1,16 +1,13 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import StudentForm from './StudentForm';
+import {Link} from 'react-router-dom';
 import StudentStateless from './StudentStateless';
-import {postStudentToServerA} from '../store';
 
 function StudentAll (props) {
   let students = props.students;
   return (
     <div>
-      <h1>ALL STUDENTS</h1>
-      <button>CREATE STUDENT</button> {/*eventually set this up*/}
-      <StudentForm  postOrUpdateA={postStudentToServerA} />
+      <Link to="/students/create"><i style={{marginTop: 20, marginLeft: 20}} className={'material-icons'}>person_add</i></Link>
       <StudentStateless students={students} />
     </div>
   )

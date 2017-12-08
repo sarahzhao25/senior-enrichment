@@ -1,9 +1,9 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import {firstNameChange, lastNameChange, emailChange, selectValueChange, gpaChange} from '../store';
+import {TextField, SelectField, MenuItem, RaisedButton} from 'material-ui';
 
 
-//DO I WANT IT TO HAVE A LOCAL STATE? I HAVE QUITE A FEW THINGS GOING ON HERE. ALSO SUBMIT HANDLER IS A BITCH
 function StudentForm(props) {
     return (
       <div>
@@ -21,46 +21,45 @@ function StudentForm(props) {
           }
           )}}>
         <div>
-          <label>First Name: </label>
-          <input
+          <TextField
             value={props.firstNameChange}
             onChange={props.firstNameChangeHandler}
-            type="text"
-            placeholder="Namae wa?" />
+            floatingLabelText="First Name"
+            hintText="Namae wa?" /><br />
 
-          <label>Last Name: </label>
-          <input
+          <TextField
             value={props.lastNameChange}
             onChange={props.lastNameChangeHandler}
-            type="text"
-            placeholder="Last name?" />
+            floatingLabelText="Last Name"
+            hintText="Last name?" /><br />
 
-          <label>Email Address: </label>
-          <input
+          <TextField
             value={props.emailChange}
             onChange={props.emailChangeHandler}
             type="email"
-            placeholder="... @gmail.com" />
+            floatingLabelText="Email Address"
+            hintText="... @gmail.com" /><br />
 
-          <label>GPA: </label>
-          <input
+          <TextField
             value={props.gpaChange}
             onChange={props.gpaChangeHandler}
+            floatingLabelText="GPA"
             type="number"
             step="0.01"
             min="0"
-            max="4"
-            placeholder="Dat grade point average?" />
+            max="4" /><br />
 
-          <label>Campus: </label>
-          <select value={props.selectValueChange} onChange={props.selectValueChangeHandler}>
-          <option value=""> -- select an option -- </option>
+          <SelectField
+          floatingLabelText="Campus"
+          value={props.selectValueChange}
+          onChange={props.selectValueChangeHandler}>
+          <MenuItem value="" primaryText="" />
           {props.campuses.map(campus => (
-            <option value={campus.id} key={campus.id}>{campus.name}</option>
+            <MenuItem value={campus.id} key={campus.id} primaryText={campus.name} />
           ))}
-          </select>
+          </SelectField><br />
           <span>
-            <button type="submit">Submit!</button>
+            <RaisedButton type="submit" label="SUBMIT" secondary={true} style={{margin: 12}} />
           </span>
         </div>
       </form>
@@ -84,7 +83,7 @@ function mapDispatchToProps(dispatch, ownProps) {
     firstNameChangeHandler: (event) => dispatch(firstNameChange(event.target.value)),
     lastNameChangeHandler: (event) => dispatch(lastNameChange(event.target.value)),
     emailChangeHandler: (event) => dispatch(emailChange(event.target.value)),
-    selectValueChangeHandler: (event) => dispatch(selectValueChange(event.target.value)),
+    selectValueChangeHandler: (event, index, value) => dispatch(selectValueChange(value)),
     gpaChangeHandler: (event) => dispatch(gpaChange(event.target.value)),
     submitHandler: (info) => dispatch(ownProps.postOrUpdateA(info, ownProps.instance))
   }

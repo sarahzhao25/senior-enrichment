@@ -41,7 +41,7 @@ export function deleteStudentFromServerA(student, props) {
 }
 
 export function updateStudentToServerA(body, student) {
-  return function(dispatch) {
+    return function(dispatch) {
     axios.put(`/api/students/${student.id}`, body)
     .then(response => response.data)
     .then(() => {

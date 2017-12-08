@@ -7,7 +7,7 @@ export function selectValueChange(selectValue) {
   }
 }
 
-export default (state = '', action) => {
+export default (state = "", action) => {
   switch (action.type) {
     case SELECT_VALUE_CHANGE:
       return action.selectValue;

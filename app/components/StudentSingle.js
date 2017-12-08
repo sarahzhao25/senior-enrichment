@@ -1,34 +1,35 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import {Route, Link} from 'react-router-dom';
-import {deleteStudentFromServerA, updateStudentToServerA} from '../store';
+import {updateStudentToServerA} from '../store';
 import StudentForm from './StudentForm';
+import {Card, CardActions, CardHeader, CardMedia, CardTitle, CardText} from 'material-ui/Card';
 
 function StudentSingle(props) {
-  //console.log(props.students, props.match)
   let student = props.students.find(student => student.id == props.match.params.studentId);
   return student ? (
     <div>
-      <h1>This SINGLE student, {student.name}, is going to Isengard!</h1>
-      <table>
-        <tbody>
-          <tr>
-            <th>Name</th>
-            <th>Campus</th>
-            <th>Email Address</th>
-            <th>GPA</th>
-          </tr>
-
-            <tr key={student.id}>
-              <td>{student.name}</td>
-              <td>{student.campus.name}</td>
-              <td>{student.email}</td>
-              <td>{student.gpa}</td>
-              <td><Link to={`/students/${student.id}/form`}><button>UPDATE STUDENT</button></Link></td>
-              <td><Link to={`/campuses/${student.campusId}`}><button>TO SINGLE CAMPUS</button></Link></td>
-            </tr>
-        </tbody>
-      </table>
+      <Card>
+        <CardHeader
+          title={`From ${student.campus.name}`}
+          subtitle="Current Student"
+          avatar={student.campus.imageUrl}
+        />
+        <CardMedia overlay={<CardTitle title={student.name} subtitle={student.email} />}>
+          <img src="http://www.astropics.com/images/products/1036.jpg" alt="" />
+        </CardMedia>
+      <CardText>
+        This student is cool, I guess. {student.firstName} has a GPA of {student.gpa}, so I guess it's not too bad.
+      </CardText>
+      <CardActions>
+        <Link to={`/students/${student.id}/form`}>
+          <i className={'material-icons'}>edit</i>
+        </Link>
+        <Link to={`/campuses/${student.campusId}`}>
+          <i className={'material-icons'}>school</i>
+        </Link>
+      </CardActions>
+    </Card>
       <Route path="/students/:studentId/form" render={() => <StudentForm postOrUpdateA={updateStudentToServerA} instance={student} />} />
     </div>
   )
@@ -43,11 +44,5 @@ function mapStateToProps(state, ownProps) {
   }
 }
 
-function mapDispatchToProps(dispatch, ownProps) {
-  return {
-    deleteHandler: (student) => dispatch(deleteStudentFromServerA(student, ownProps))
-  }
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(StudentSingle)
+export default connect(mapStateToProps)(StudentSingle)
 

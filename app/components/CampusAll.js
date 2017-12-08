@@ -3,6 +3,25 @@ import {connect} from 'react-redux';
 import {Link} from 'react-router-dom';
 import CampusAddForm from './CampusAddForm';
 import {deleteCampusFromServerA} from '../store';
+import {GridList, GridTile} from 'material-ui/GridList';
+import IconButton from 'material-ui/IconButton';
+import Subheader from 'material-ui/Subheader';
+import StarBorder from 'material-ui/svg-icons/toggle/star-border';
+
+
+const styles = {
+  root: {
+    display: 'flex',
+    flexWrap: 'wrap',
+    justifyContent: 'space-around',
+  },
+  gridList: {
+    cols: 3,
+    width: 1000,
+    height: 700,
+    overflowY: 'auto'
+  },
+};
 
 function CampusAll(props) {
   let campuses = props.campuses;
@@ -10,19 +29,27 @@ function CampusAll(props) {
   let deleteCampus = props.deleteCampus;
   return (
     <div>
-      <h1>ALL CAMPUSES</h1>
       <CampusAddForm />
-      <ul>
+      <div style={styles.root}>
+        <GridList cellHeight={180} style={styles.gridList}>
+      <Subheader>Campuses</Subheader>
       {campuses.map(campus => {
         let studentLength = students.filter(student => student.campusId == campus.id).length;
-        return (<li key={campus.id}>
-                  <Link to={`/campuses/${campus.id}`}>{campus.name}
-                  </Link>
-                  <button disabled = {studentLength > 0} onClick={() => deleteCampus(campus)}>DELETE Campus :(</button>
-                </li>)
-      }
-      )}
-      </ul>
+        return (
+          <GridTile
+            key={campus.id}
+            title={campus.name}
+            actionIcon={
+              <IconButton disabled = {studentLength > 0} onClick={() => deleteCampus(campus)}>
+                  <StarBorder color="white" />
+              </IconButton>
+            }
+          >
+          <Link to={`/campuses/${campus.id}`}><img src={campus.imageUrl} /></Link>
+          </GridTile>
+        )})}
+      </GridList>
+    </div>
     </div>
   )
 }
