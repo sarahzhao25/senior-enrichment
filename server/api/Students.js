@@ -18,7 +18,8 @@ StudentRouter.param('id', (req, res, next, id) => {
 });
 
 StudentRouter.get('/', (req, res, next) => {
-  Student.findAll({include: [Campus]})
+  Student.findAll({include: {all: true}})
+  .then(students => Promise.all(students.map(student => student)))
   .then(students => res.json(students))
   .catch(next);
 });
@@ -41,7 +42,13 @@ StudentRouter.put('/:id', (req, res, next) => {
 });
 
 StudentRouter.delete('/:id', (req, res, next) => {
-  req.student.destroy()
+  Student.destroy({
+    where: {id: req.student.id}
+  },
+    {truncate: true,
+      cascade: false
+    }
+  )
   .then(() => res.send({Message: 'Killed student off successfully!'}))
   .catch(next);
 });

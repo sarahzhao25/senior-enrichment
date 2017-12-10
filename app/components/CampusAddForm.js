@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import {postCampusToServerA} from '../store';
+import {RaisedButton, TextField} from 'material-ui';
 
 class CampusAddForm extends Component {
   constructor() {
@@ -37,59 +37,65 @@ class CampusAddForm extends Component {
 
   submitHandler(event) {
     event.preventDefault();
-    this.props.postCampus({ name: this.state.campusName, imageUrl: this.state.campusUrl, description: this.state.campusDescription });
+    this.props.postOrUpdateCampus({ name: this.state.campusName || undefined, imageUrl: this.state.campusUrl || undefined, description: this.state.campusDescription || undefined }, this.props.campusId);
     this.setState({campusName: '', campusPicture: '', campusDescription: '', isDirty: false});
   }
 
   render() {
     return (
-      <div>
-      <button onClick={this.clickHandler}>+ ADD NEW CAMPUS</button>
+      <div style={{display: 'inline'}}>
+      <RaisedButton onClick={this.clickHandler} label={this.props.label} default={true} style={{margin: 12}} />
       {this.state.clickedbutton ?
         (
         <div>
-          <h3>Really, try me a NEW CAMPUS?</h3>
           <form id="new-campus-form" onSubmit={this.submitHandler}>
             <div>
-              <label>Campus Name: </label>
-              <input
+              <TextField
                 value={this.state.campusName}
                 onChange={this.campusNameChangeHandler}
                 type="text"
-                placeholder="Caaaaampus Name?" />
-              <label>Campus Link: </label>
-              <input
+                floatingLabelText={this.props.campus && this.props.campus.name}
+                hintText="Name" />
+                <br />
+              <TextField
                 value={this.state.campusPicture}
                 onChange={this.campusPictureChangeHandler}
                 type="url"
-                placeholder="Caaaaampus Picture?" />
-              <label>Campus Description: </label>
-              <textarea
+                floatingLabelText={this.props.campus && this.props.campus.imageUrl}
+                hintText="Image URL" />
+                <br />
+              <TextField
                 value={this.state.campusDescription}
                 onChange={this.campusDescriptionChangeHandler}
-                rows="3"
-                cols="50"
-                placeholder="Caaaaampus Description?"></textarea>
+                multiLine={true}
+                rows={2}
+                rowsMax={4}
+                hintText="Description"
+                floatingLabelText={this.props.campus && this.props.campus.description.slice(0, 23) + '...'} />
+                <br />
               <span>
-                <button type="submit" disabled={!this.state.campusName.length && this.state.isDirty}>Submit!</button>
+                <RaisedButton type="submit" label="SUBMIT" disabled={!this.state.campusName.length && !this.state.isDirty} secondary={true} style={{margin: 12}} />
               </span>
             </div>
           </form>
-        </div>) : (<div />)
+        </div>) : null
       }
   </div>
     )
   }
 }
 
-function mapStateToProps(state) {
+function mapStateToProps(state, ownProps) {
   return {
+    label: ownProps.label,
+    campusId: ownProps.campusId,
+    campus: ownProps.campus
   }
 }
 
-function mapDispatchToProps(dispatch) {
+function mapDispatchToProps(dispatch, ownProps) {
   return {
-    postCampus: function(info) {dispatch(postCampusToServerA(info))}
+    postOrUpdateCampus: function(body) {dispatch(ownProps.postOrUpdateCampusA(body, ownProps.campusId))}
   }
 }
 

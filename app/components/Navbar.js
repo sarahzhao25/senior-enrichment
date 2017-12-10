@@ -1,21 +1,35 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
-import RaisedButton from 'material-ui/RaisedButton';
-import AppBar from 'material-ui/AppBar';
+import {AppBar, IconButton, IconMenu, MenuItem} from 'material-ui';
+import MoreVertIcon from 'material-ui/svg-icons/navigation/more-vert';
 
-export default function NavBar() {
-  return (
-    <div>
-      <AppBar
-        title="I LIKE FRISBEE"
-        iconClassNameRight="muidocs-icon-navigation-expand-more"
-      />
-      <nav>
-        <h1>Check out this home navigation bar, yo!</h1>
-        <span><Link to="/"><RaisedButton label="HOME" /></Link></span>
-        <span><Link to="/students"><RaisedButton label="ALL CAMPUSES" /></Link></span>
-        <span><Link to="/campuses"><RaisedButton label="ALLSTUDENTS" /></Link></span>
-      </nav>
-    </div>
-  )
-}
+const Title = "Welcome To Margaret Hamilton Interplanetary Academy of JavaScript";
+
+const Logged = (props) => (
+  <IconMenu
+    {...props}
+    iconButtonElement={
+      <IconButton><MoreVertIcon /></IconButton>
+    }
+    targetOrigin={{horizontal: 'right', vertical: 'top'}}
+    anchorOrigin={{horizontal: 'right', vertical: 'top'}}
+  >
+    <Link to="/" style={{ textDecoration: 'none' }}><MenuItem primaryText="HOME" /></Link>
+    <Link to="/students" style={{ textDecoration: 'none' }}><MenuItem primaryText="STUDENTS" /></Link>
+    <Link to="/campuses" style={{ textDecoration: 'none' }}><MenuItem primaryText="CAMPUSES" /></Link>
+  </IconMenu>
+);
+
+function NavBar() {
+    return (
+      <div>
+        <AppBar
+          title={Title}
+          showMenuIconButton={false}
+          iconElementRight={<Logged />}
+        />
+      </div>
+    );
+  }
+
+export default NavBar;

@@ -30,7 +30,7 @@ function StudentSingle(props) {
         </Link>
       </CardActions>
     </Card>
-      <Route path="/students/:studentId/form" render={() => <StudentForm postOrUpdateA={updateStudentToServerA} studentId={student.id} />} />
+      <Route path="/students/:studentId/form" render={() => <StudentForm postOrUpdateA={updateStudentToServerA} student={student} studentId={student.id} />} />
     </div>
   )
   :

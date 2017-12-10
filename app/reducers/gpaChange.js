@@ -7,7 +7,7 @@ export function gpaChange(gpa) {
   }
 }
 
-export default function (state = 0, action) {
+export default function (state = '', action) {
   switch (action.type) {
     case GPA_CHANGE:
       return action.gpa;

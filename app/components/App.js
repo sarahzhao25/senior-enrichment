@@ -1,15 +1,14 @@
 import React, {Component} from 'react';
-import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
+import {BrowserRouter as Router, Route, Redirect, Switch} from 'react-router-dom';
 import {connect} from 'react-redux';
 import {getCampusesFromServerA, getStudentsFromServerA, postStudentToServerA} from '../store';
-//import Navbar from './Navbar';
 import StudentAll from './StudentAll';
 import CampusAll from './CampusAll';
 import CampusSingle from './CampusSingle';
 import StudentSingle from './StudentSingle';
 import StudentForm from './StudentForm';
 import Home from './Home';
-import AppBarExampleComposition from '../mui-components/AppBarComposition';
+import NavBar from './NavBar';
 
 class App extends Component {
 
@@ -22,7 +21,7 @@ class App extends Component {
     return (
       <Router>
         <div>
-          <AppBarExampleComposition /> {/*updated NavBar*/}
+          <NavBar />
           <div>
             <Switch>
               <Route exact path="/" component={Home} />
@@ -31,7 +30,7 @@ class App extends Component {
               <Route path="/campuses/:campusId" component={CampusSingle} />
               <Route exact path="/students/create" render={() => (<StudentForm postOrUpdateA={postStudentToServerA} />)} />
               <Route path="/students/:studentId" component={StudentSingle} />
-              <Route default component={Home} />
+              <Redirect to="/" />
             </Switch>
           </div>
         </div>

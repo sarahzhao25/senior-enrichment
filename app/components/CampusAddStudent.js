@@ -4,7 +4,7 @@ import {SelectField, MenuItem, RaisedButton} from 'material-ui';
 import {selectValueChange, updateStudentToServerA} from '../store';
 
 function CampusAddStudent(props) {
-  let students = props.students.filter(student => student.campusId != props.campusId);
+  let students = props.students.filter(student => Number(student.campusId) !== Number(props.campusId));
   return (
     <div>
       <form onSubmit={(event) => {
@@ -21,9 +21,7 @@ function CampusAddStudent(props) {
                 ))
               }
             </SelectField>
-          <span>
             <RaisedButton type="submit" label="SUBMIT" secondary={true} style={{margin: 12}} />
-          </span>
         </div>
       </form>
     </div>

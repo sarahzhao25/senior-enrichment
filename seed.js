@@ -388,7 +388,8 @@ const seed = () =>
 
 const main = () => {
   console.log('Syncing db...maybe?');
-  db.sync({force: true})
+  Campus.sync({force: true})
+    .then(() => Student.sync({force: true}))
     .then(() => {
       console.log('Seeding database!...?')
       return seed();

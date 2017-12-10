@@ -2,12 +2,10 @@ import React from 'react';
 import {connect} from 'react-redux';
 import {Link} from 'react-router-dom';
 import CampusAddForm from './CampusAddForm';
-import {deleteCampusFromServerA} from '../store';
+import {deleteCampusFromServerA, postCampusToServerA} from '../store';
 import {GridList, GridTile} from 'material-ui/GridList';
-import IconButton from 'material-ui/IconButton';
-import Subheader from 'material-ui/Subheader';
+import {IconButton, Subheader} from 'material-ui';
 import StarBorder from 'material-ui/svg-icons/toggle/star-border';
-
 
 const styles = {
   root: {
@@ -16,7 +14,6 @@ const styles = {
     justifyContent: 'space-around',
   },
   gridList: {
-    cols: 3,
     width: 1000,
     height: 700,
     overflowY: 'auto'
@@ -24,33 +21,31 @@ const styles = {
 };
 
 function CampusAll(props) {
-  let campuses = props.campuses;
-  let students = props.students;
-  let deleteCampus = props.deleteCampus;
+  let {campuses, students, deleteCampus, location} = props;
   return (
-    <div> {props.location &&
-      <CampusAddForm />
+    <div> {location &&
+      <CampusAddForm label={'+ CAMPUS'} postOrUpdateCampusA={postCampusToServerA} />
     }
       <div style={styles.root}>
         <GridList cellHeight={180} style={styles.gridList}>
-      <Subheader>Campuses</Subheader>
-      {campuses.map(campus => {
-        let studentLength = students.filter(student => student.campusId == campus.id).length;
-        return (
-          <GridTile
-            key={campus.id}
-            title={campus.name}
-            actionIcon={
-              <IconButton disabled = {studentLength > 0} onClick={() => deleteCampus(campus)}>
-                  <StarBorder color="white" />
-              </IconButton>
-            }
-          >
-          <Link to={`/campuses/${campus.id}`}><img src={campus.imageUrl} /></Link>
-          </GridTile>
+          <Subheader>Campuses</Subheader>
+          {campuses.map(campus => {
+          let studentLength = students.filter(student => Number(student.campusId) === campus.id).length;
+            return (
+              <GridTile
+                key={campus.id}
+                title={campus.name}
+                actionIcon={
+                  <IconButton disabled = {!!studentLength} onClick={() => deleteCampus(campus)}>
+                      <StarBorder color="white" />
+                  </IconButton>
+                }
+              >
+                <Link to={`/campuses/${campus.id}`}><img src={campus.imageUrl} /></Link>
+              </GridTile>
         )})}
-      </GridList>
-    </div>
+        </GridList>
+      </div>
     </div>
   )
 }

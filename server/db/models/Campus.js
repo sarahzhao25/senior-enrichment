@@ -11,7 +11,7 @@ const Campus = db.define('campus', {
   },
   imageUrl: {
     type: Sequelize.STRING,
-    defaultValue: 'https://i.pinimg.com/736x/96/e1/62/96e16261da625fc18a478e79d39bc4c3--cornell-university-university-college.jpg'
+    defaultValue: 'https://i.imgur.com/66Iy06Z.png'
   },
   description: {
     type: Sequelize.TEXT

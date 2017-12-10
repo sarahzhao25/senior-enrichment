@@ -5,7 +5,7 @@ import {deleteStudentFromServerA} from '../store';
 import {Table, TableBody, TableHeader, TableHeaderColumn, TableRow, TableRowColumn} from 'material-ui/Table';
 
 function StudentStateless (props) {
-  let students = props.students;
+  let students = props.students.sort((first, second) => first.id - second.id);
   return (
     <Table>
       <TableHeader displaySelectAll={false} adjustForCheckbox={false}>

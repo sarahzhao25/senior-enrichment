@@ -3,29 +3,35 @@ import {connect} from 'react-redux';
 import {Route, Link} from 'react-router-dom';
 import StudentStateless from './StudentStateless';
 import CampusAddStudent from './CampusAddStudent';
-import {deleteCampusFromServerA} from '../store';
-import CampusUpdateForm from './CampusUpdateForm';
+import {deleteCampusFromServerA, updateCampusToServerA} from '../store';
+import CampusAddForm from './CampusAddForm';
+import {RaisedButton} from 'material-ui';
+import {Card, CardHeader, CardMedia, CardTitle, CardText} from 'material-ui/Card';
 
 function CampusSingle(props) {
   let campusId = props.campusId;
-  let students = props.students.filter(student => student.campusId == campusId);
+  let students = props.students.filter(student => student.campusId === Number(campusId));
   let deleteCampus = props.deleteCampus;
-  let campus = props.campuses.find(oneCampus => oneCampus.id == campusId);
+  let campus = props.campuses.find(oneCampus => oneCampus.id === Number(campusId));
   return campus ?
    (
     <div>
-      <h1>I'll tell you all about this SINGLE campus!</h1>
-      <h2>Name:</h2>
-      <h3>{campus.name}</h3>
-      <h2>Description: </h2>
-      <h3>{campus.description}</h3>
-      <img src={campus.imageUrl} alt="Campus Photo" />
-      <StudentStateless students={students} />
-      <button disabled = {students.length > 0} onClick={() => deleteCampus(campus)}>DELETE Campus :(</button>
-      <Link to={`/campuses/${campus.id}/update`}><button>UPDATE this Campus</button></Link>
-      <Link to={`/campuses/${campus.id}/addStudent`}><button>ADD student here!</button></Link>
-      <Route path="/campuses/:campusId/update" render={() => (<CampusUpdateForm campuses={props.campuses} students={students} campus={campus} />)} />
-      <Route path="/campuses/:campusId/addStudent" render={() => (<CampusAddStudent campusId={campus.id} />)} />
+    <Card>
+      <CardHeader
+        title={campus.name}
+        subtitle="Campus"
+        avatar={campus.imageUrl}
+      />
+      <CardMedia overlay={<CardTitle title={campus.name} />}>
+        <img src={campus.imageUrl} alt="" />
+      </CardMedia>
+      <CardText>{campus.description}</CardText>
+    </Card>
+    <RaisedButton disabled = {students.length > 0} onClick={() => deleteCampus(campus)}label="DELETE" default={true} style={{margin: 12}} />
+    <CampusAddForm label={'UPDATE'} postOrUpdateCampusA={updateCampusToServerA} campusId={campus.id} campus={campus} />
+    <Link to={`/campuses/${campus.id}/addStudent`}><RaisedButton label="ADD STUD" primary={true} style={{margin: 12}} /></Link>
+    <Route path="/campuses/:campusId/addStudent" render={() => (<CampusAddStudent campusId={campus.id} />)} />
+    <StudentStateless students={students} />
     </div>
   )
   :
