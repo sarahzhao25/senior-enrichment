@@ -3,7 +3,7 @@ import {Link} from 'react-router-dom';
 import {AppBar, IconButton, IconMenu, MenuItem} from 'material-ui';
 import MoreVertIcon from 'material-ui/svg-icons/navigation/more-vert';
 
-const Title = "Welcome To Margaret Hamilton Interplanetary Academy of JavaScript";
+const Title = 'Welcome To Margaret Hamilton Interplanetary Academy of JavaScript';
 
 const Logged = (props) => (
   <IconMenu

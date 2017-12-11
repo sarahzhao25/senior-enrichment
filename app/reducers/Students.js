@@ -14,17 +14,18 @@ export function getStudentsFromServerA() {
   }
 }
 
-export function postStudentToServerA(body) {
+export function postStudentToServerA(body, updateProps, history) {
   return function(dispatch) {
     axios.post('/api/students', body)
     .then(response => response.data)
-    .then(() => {
+    .then((newStudent) => {
       dispatch(getStudentsFromServerA());
       dispatch(firstNameChange(''));
       dispatch(lastNameChange(''));
       dispatch(emailChange(''));
-      dispatch(gpaChange(0));
+      dispatch(gpaChange(''));
       dispatch(selectValueChange(''));
+      history.push(`/students/${newStudent.id}`)
     })
   }
 }

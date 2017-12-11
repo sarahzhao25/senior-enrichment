@@ -51,7 +51,7 @@ function StudentStateless (props) {
 
 function mapStateToProps (state, ownProps) {
   return {
-    students: ownProps.students,
+    students: ownProps.students
   }
 }
 

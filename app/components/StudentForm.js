@@ -6,7 +6,6 @@ import {TextField, SelectField, MenuItem, RaisedButton} from 'material-ui';
 
 function StudentForm(props) {
   let student = props.student;
-  console.log(student)
     return (
       <div>
         <h3>Mmm, what's your name?</h3>
@@ -90,7 +89,7 @@ function mapDispatchToProps(dispatch, ownProps) {
     emailChangeHandler: (event) => dispatch(emailChange(event.target.value)),
     selectValueChangeHandler: (event, index, value) => dispatch(selectValueChange(value)),
     gpaChangeHandler: (event) => dispatch(gpaChange(event.target.value)),
-    submitHandler: (info) => dispatch(ownProps.postOrUpdateA(info, ownProps.studentId))
+    submitHandler: (info) => dispatch(ownProps.postOrUpdateA(info, ownProps.studentId, ownProps.history))
   }
 }
 

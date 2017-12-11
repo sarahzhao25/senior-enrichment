@@ -6,7 +6,7 @@ import StudentForm from './StudentForm';
 import {Card, CardActions, CardHeader, CardMedia, CardTitle, CardText} from 'material-ui/Card';
 
 function StudentSingle(props) {
-  let student = props.students.find(student => student.id == props.match.params.studentId);
+  let student = props.students.find(stud => Number(stud.id) === Number(props.match.params.studentId));
   return student ? (
     <div>
       <Card>

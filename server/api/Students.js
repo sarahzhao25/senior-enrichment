@@ -42,13 +42,7 @@ StudentRouter.put('/:id', (req, res, next) => {
 });
 
 StudentRouter.delete('/:id', (req, res, next) => {
-  Student.destroy({
-    where: {id: req.student.id}
-  },
-    {truncate: true,
-      cascade: false
-    }
-  )
+  req.student.destroy()
   .then(() => res.send({Message: 'Killed student off successfully!'}))
   .catch(next);
 });

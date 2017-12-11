@@ -1,6 +1,6 @@
 const express = require('express');
 const CampusRouter = express.Router();
-const {Campus, Student} = require('../db/models');
+const {Campus} = require('../db/models');
 
 CampusRouter.param('id', (req, res, next, id) => {
   Campus.findById(id)
@@ -34,14 +34,16 @@ CampusRouter.post('/', (req, res, next) => {
   .catch(next);
 });
 
-CampusRouter.put('/:id', (req, res) => {
+CampusRouter.put('/:id', (req, res, next) => {
   req.campus.update(req.body)
   .then(updatedCampus => res.json(updatedCampus))
+  .catch(next);
 });
 
-CampusRouter.delete('/:id', (req, res) => {
+CampusRouter.delete('/:id', (req, res, next) => {
   req.campus.destroy()
   .then(() => res.send({Message: 'Destroyed successfully'}))
+  .catch(next);
 });
 
 module.exports = CampusRouter;
