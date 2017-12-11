@@ -6,7 +6,7 @@ const Campus = db.define('campus', {
     type: Sequelize.STRING,
     allowNull: false,
     validate: {
-      notEmpty: true
+      notEmpty: true,
     }
   },
   imageUrl: {

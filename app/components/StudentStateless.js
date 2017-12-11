@@ -28,15 +28,15 @@ function StudentStateless (props) {
       <TableRow key={student.id}>
         <TableRowColumn>{student.id}</TableRowColumn>
         <TableRowColumn>{student.name}</TableRowColumn>
-        <TableRowColumn>{student.campus.name}</TableRowColumn>
+        <TableRowColumn>{props.campuses.find(campus => Number(student.campus.id) === campus.id ).name}</TableRowColumn>
         <TableHeaderColumn>
           <Link to={`/students/${student.id}`} style={{ textDecoration: 'none' }}>
-            <i className={'material-icons'}>person_outline</i>
+            <i className={'material-icons'} style={{color: 'black'}}>person_outline</i>
           </Link>
         </TableHeaderColumn>
         <TableRowColumn>
           <Link to={`/students/${student.id}/form`} style={{ textDecoration: 'none' }}>
-            <i className={'material-icons'}>edit</i>
+            <i className={'material-icons'} style={{color: 'black'}}>edit</i>
           </Link>
         </TableRowColumn>
         <TableRowColumn>
@@ -51,7 +51,8 @@ function StudentStateless (props) {
 
 function mapStateToProps (state, ownProps) {
   return {
-    students: ownProps.students
+    students: ownProps.students,
+    campuses: state.campuses
   }
 }
 
